@@ -1,5 +1,5 @@
-"use strict";
 import dayjs from "dayjs";
+"use strict";
 
 /*
  * Animal Adoption Board
@@ -59,6 +59,12 @@ function displayAnimals(animalArray) {
 		const status = document.createElement("p");
 		status.textContent = animal.adopted ? "Adopted" : "Available";
 
+		const arrivalDate = document.createElement("p");
+		arrivalDate.textContent = "Arrived " + dayjs(animal.intakeDate).format("MMM D, YYYY");
+
+		const daysInShelter = document.createElement("p");
+		daysInShelter.textContent = dayjs().diff(animal.intakeDate, "day") + " days in shelter";
+
 		const button = document.createElement("button");
 		button.type = "button";
 		button.textContent = animal.adopted ? "Return" : "Adopt";
@@ -69,7 +75,7 @@ function displayAnimals(animalArray) {
 		// remembers this card's animal (a closure) and passes its id along.
 		button.addEventListener("click", () => toggleAdoption(animal.id));
 
-		card.append(heading, details, status, button);
+		card.append(heading, details, status, arrivalDate, daysInShelter, arrivalDate, daysInShelter, button);
 		animalList.appendChild(card);
 	});
 }
