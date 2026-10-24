@@ -1,4 +1,5 @@
 "use strict";
+import dayjs from "dayjs";
 
 /*
  * Animal Adoption Board
@@ -158,3 +159,28 @@ sortSelect.addEventListener("change", () => {
 });
 
 // Display the original list and the count when the page first opens.
+async function loadAnimals() {
+	document.querySelector("#animal-count").textContent = "Loading animals...";
+	document.querySelector("#animal-list").innerHTML = "";
+	try {
+		//Await pauses the async function until the fetch() promise is resolved.
+		const response = await fetch("animals.json");
+		
+		//This response is needed to make sure the fetch() is successful. Without this, the promise will still resolve, but the data will be empty.
+		if (!response.ok) {
+			throw new Error(`Request failed with status ${response.status}`);
+		}
+
+		//Quick question: Why do I need to add the .json() for this to work? Is it not formatted from the fetch?
+		const data = await response.json();
+		animals = data;
+		updateDisplay()
+	}
+
+	catch (error) {
+		console.error("Error loading animals:", error);
+		document.querySelector("#animal-count").innerHTML = ""
+		document.querySelector("#animal-list").innerHTML = "<p class='error-message'>Sorry, the animals couldn't be loaded. Try refreshing the page.</p>";
+	}
+}
+loadAnimals();
