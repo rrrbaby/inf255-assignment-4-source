@@ -1,3 +1,14 @@
+# About this project
+
+## How to run
+In your terminal, run 'npm install' to install the proper dependancies (day.js). Then use npm run dev to open the site.
+
+## Dependancies check
+day.js allows the project to dynamically display the date in which the animal arrived in the adoption center, and how long they've been there.
+The size of the .js file created is 10.72 kB.
+The same thing could've been achieved without day.js, using new Date() for the current date and comparing that to the arrival date of the animal.
+However, day,js was worth adding for the simplicity of it's syntax and formatting.
+
 # Assignment 4 — Loading Data with async and npm
 
 You will continue building the animal adoption app in this assignment, but instead of working with an array of local data, you will fetch the data from a json file. While fetching the data, your interface will display a "loading" message, and depending on the response, show the resulting list or an error message.
